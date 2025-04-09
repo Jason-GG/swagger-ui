@@ -115,7 +115,7 @@ export default class BaseLayout extends React.Component {
                 {hasServers || hasSchemes ? (
                   <div className="schemes-server-container">
                     {hasServers ? <ServersContainer /> : null}
-                    {hasSchemes ? <SchemesContainer /> : null}
+                    {/* {hasSchemes ? <SchemesContainer /> : null} */}
                   </div>
                 ) : null}
                 {hasSecurityDefinitions ? <AuthorizeBtnContainer /> : null}

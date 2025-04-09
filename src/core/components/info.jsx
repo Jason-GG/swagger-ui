@@ -107,18 +107,18 @@ class Info extends React.Component {
           {host || basePath ? (
             <InfoBasePath host={host} basePath={basePath} />
           ) : null}
-          {url && <InfoUrl getComponent={getComponent} url={url} />}
+          {/* {url && <InfoUrl getComponent={getComponent} url={url} />} */}
         </hgroup>
 
         <div className="description">
-          <Markdown source={description} />
+          {/* <Markdown source={description} /> */}
         </div>
 
         {termsOfServiceUrl && (
           <div className="info__tos">
-            <Link target="_blank" href={sanitizeUrl(termsOfServiceUrl)}>
+            {/* <Link target="_blank" href={sanitizeUrl(termsOfServiceUrl)}>
               Terms of service
-            </Link>
+            </Link> */}
           </div>
         )}
 
@@ -130,14 +130,14 @@ class Info extends React.Component {
             url={url}
           />
         )}
-        {licenseData?.size > 0 && (
+        {/* {licenseData?.size > 0 && (
           <License
             getComponent={getComponent}
             license={licenseData}
             selectedServer={selectedServer}
             url={url}
           />
-        )}
+        )} */}
         {externalDocsUrl ? (
           <Link
             className="info__extdocs"

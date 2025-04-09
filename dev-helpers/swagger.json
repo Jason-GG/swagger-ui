@@ -1,0 +1,1187 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CMDB API",
+    "description": "MDB API description",
+    "termsOfService": "https://cmdbservice.cloud.microstrategy.com/#/dashboard",
+    "contact": { "email": "sjian@mmicrostrategy.com" },
+    "license": { "name": "License" },
+    "version": "v1"
+  },
+  "host": "cmdb-api.cloud.microstrategy.com",
+  "schemes": ["https"],
+  "basePath": "/api",
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "api_key": { "type": "apiKey", "in": "header", "name": "Authorization" }
+  },
+  "security": [{ "api_key": [] }],
+  "paths": {
+    "/AlarmFilterInfo": {
+      "post": {
+        "operationId": "AlarmFilterInfo",
+        "summary": "AlarmFilterInfo interface",
+        "description": "for get AlarmInfo with filter",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["platform", "infoList", "name_list"],
+              "type": "object",
+              "properties": {
+                "name_list": {
+                  "description": "Instance Name: env-xxxxxx",
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "infoList": {
+                  "description": "Instance Name: ec2_name,InstanceId,client_id(Aws),name,vm_id,location(Azure)",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "required": ["platform", "infoList", "name_list"],
+              "type": "object",
+              "properties": {
+                "name_list": {
+                  "description": "Instance Name: env-xxxxxx",
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "infoList": {
+                  "description": "Instance Name: ec2_name,InstanceId,client_id(Aws),name,vm_id,location(Azure)",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Aws"]
+      },
+      "parameters": []
+    },
+    "/AlarmNamespaceList": {
+      "get": {
+        "operationId": "AlarmNamespaceList",
+        "summary": "AlarmNamespaceList Interface",
+        "description": "for get AlarmNamespace List",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Aws"]
+      },
+      "parameters": []
+    },
+    "/AzureApplicationGateway": {
+      "get": {
+        "operationId": "AzureApplication get",
+        "summary": "AzureApplicationGateway interface",
+        "description": "for getting AzureApplication",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Azure"]
+      },
+      "post": {
+        "operationId": "AzureApplicationGateway",
+        "summary": "AzureApplicationGateway interface",
+        "description": "for get AzureApplicationGateway with filter",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["platform", "infoList", "name_list"],
+              "type": "object",
+              "properties": {
+                "name_list": {
+                  "description": "Instance Name: env-xxxxxx",
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "infoList": {
+                  "description": "Instance Name: name,frontend_ports,backend_address_pools,backend_http_settings_collection,http_listeners,autoscale_configuration",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "required": ["platform", "infoList", "name_list"],
+              "type": "object",
+              "properties": {
+                "name_list": {
+                  "description": "Instance Name: env-xxxxxx",
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "infoList": {
+                  "description": "Instance Name: name,frontend_ports,backend_address_pools,backend_http_settings_collection,http_listeners,autoscale_configuration",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Azure"]
+      },
+      "parameters": []
+    },
+    "/AzureInfo": {
+      "post": {
+        "operationId": "AzureInfo_create",
+        "description": "",
+        "parameters": [],
+        "responses": { "201": { "description": "" } },
+        "tags": ["AzureInfo"]
+      },
+      "parameters": []
+    },
+    "/AzureNetworkGateway": {
+      "get": {
+        "operationId": "AzureNetworkGateway get",
+        "summary": "AzureNetworkGateway interface",
+        "description": "for getting AzureNetworkGateway",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Azure"]
+      },
+      "parameters": []
+    },
+    "/AzurePrivateLinkInfo": {
+      "get": {
+        "operationId": "PrivateLinkInfo",
+        "summary": "Private Link Info interface",
+        "description": "for getting Private Link Info",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Azure"]
+      },
+      "parameters": []
+    },
+    "/EbsInfo": {
+      "post": {
+        "operationId": "EbsInfo_create",
+        "description": "",
+        "parameters": [],
+        "responses": { "201": { "description": "" } },
+        "tags": ["EbsInfo"]
+      },
+      "parameters": []
+    },
+    "/Ec2InfoQueryFromCid": {
+      "get": {
+        "operationId": "Ec2InfoFromCid",
+        "summary": "Ec2Info list from CID interface",
+        "description": "for getting Ec2Info list from CID",
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "description": "Azure/Aws",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cid",
+            "in": "query",
+            "description": "CXXX",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Ec2 Vm Info"]
+      },
+      "parameters": []
+    },
+    "/EfsInfo": {
+      "get": {
+        "operationId": "EfsInfo",
+        "summary": "EfsInfo interface",
+        "description": "for getting EfsInfo",
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "description": "Aws",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Aws"]
+      },
+      "parameters": []
+    },
+    "/InstanceKeysInfo": {
+      "get": {
+        "operationId": "InstanceKeysInfo",
+        "summary": "InstanceKeysInfo interface",
+        "description": "for getting InstanceKeysInfo",
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "description": "Azure/Aws",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Ec2 Vm Info"]
+      },
+      "parameters": []
+    },
+    "/NetAppInfo": {
+      "get": {
+        "operationId": "NetAppInfo",
+        "summary": "NetApp Info interface",
+        "description": "for getting NetApp Info",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Azure"]
+      },
+      "parameters": []
+    },
+    "/VpcNatGateway": {
+      "get": {
+        "operationId": "NatGatewayInfo",
+        "summary": "NatGatewayInfo interface",
+        "description": "for getting NatGatewayInfo",
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "description": "Aws",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Aws"]
+      },
+      "parameters": []
+    },
+    "/ec2ClientInfo": {
+      "get": {
+        "operationId": "Ec2Info",
+        "summary": "Ec2Info interface",
+        "description": "for getting Ec2Info",
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "description": "Azure/Aws",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "infoList",
+            "in": "query",
+            "description": "The Column you choose: ec2_name,tag_stage(Aws) or azure_id,stage_tag(Azure)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Ec2 Vm Info"]
+      },
+      "parameters": []
+    },
+    "/ec2InfoQueryList": {
+      "post": {
+        "operationId": "Ec2InfoQueryList",
+        "summary": "Ec2InfoQueryList interface",
+        "description": "for getting Ec2InfoQueryList",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["platform", "infoList", "name_list"],
+              "type": "object",
+              "properties": {
+                "platform": { "description": "Aws/Azure", "type": "string" },
+                "name_list": {
+                  "description": "Instance Name: env-xxxxxx",
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "infoList": {
+                  "description": "Instance Name: ec2_name,InstanceId,client_id(Aws),name,vm_id,location(Azure)",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "required": ["platform", "infoList", "name_list"],
+              "type": "object",
+              "properties": {
+                "platform": { "description": "Aws/Azure", "type": "string" },
+                "name_list": {
+                  "description": "Instance Name: env-xxxxxx",
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "infoList": {
+                  "description": "Instance Name: ec2_name,InstanceId,client_id(Aws),name,vm_id,location(Azure)",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Ec2 Vm Info"]
+      },
+      "parameters": []
+    },
+    "/gcp/clusters": {
+      "get": {
+        "operationId": "Gcp clusters get",
+        "summary": "Gcp Clusters info interface",
+        "description": "for getting Gcp Clusters info",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["GCP"]
+      },
+      "parameters": []
+    },
+    "/gcp/envs": {
+      "get": {
+        "operationId": "Gcp envs get",
+        "summary": "Gcp envs info interface",
+        "description": "for getting Gcp envs info",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["GCP"]
+      },
+      "parameters": []
+    },
+    "/gcp/job": {
+      "post": {
+        "operationId": "Gcp Cluster Jobs create",
+        "summary": "Gcp Cluster Jobs create interface",
+        "description": "for Gcp Cluster Jobs create",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "example": "mstr-env-env-xxxxxxxx"
+                },
+                "jobName": {
+                  "type": "string",
+                  "example": "sync-customer-bucket-job"
+                },
+                "contextName": {
+                  "type": "string",
+                  "example": "gke_prj-mstr-prod-tenant-xxxxxxxxxxx-env-cluster"
+                },
+                "jobSpec": {
+                  "type": "object",
+                  "properties": {
+                    "apiVersion": { "type": "string", "example": "batch/v1" },
+                    "kind": { "type": "string", "example": "Job" },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "example": "sync-customer-bucket-job"
+                        },
+                        "namespace": {
+                          "type": "string",
+                          "example": "mstr-env-env-xxxxxx"
+                        }
+                      }
+                    },
+                    "spec": {
+                      "type": "object",
+                      "properties": {
+                        "template": {
+                          "type": "object",
+                          "properties": {
+                            "metadata": {
+                              "type": "object",
+                              "properties": {
+                                "annotations": {
+                                  "type": "object",
+                                  "properties": {
+                                    "sidecar.istio.io/inject": {
+                                      "type": "string",
+                                      "example": "false"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "spec": {
+                              "type": "object",
+                              "properties": {
+                                "securityContext": {
+                                  "type": "object",
+                                  "properties": {
+                                    "runAsUser": {
+                                      "type": "integer",
+                                      "example": 0
+                                    },
+                                    "runAsGroup": {
+                                      "type": "integer",
+                                      "example": 0
+                                    }
+                                  }
+                                },
+                                "containers": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "name": {
+                                        "type": "string",
+                                        "example": "infrastructure-service"
+                                      },
+                                      "image": {
+                                        "type": "string",
+                                        "example": "us-east4-docker.pkg.dev/g000-mgmt-infra/cicd-repo/bash-basic-image:0.0.1"
+                                      },
+                                      "command": {
+                                        "type": "array",
+                                        "items": { "type": "string" },
+                                        "example": ["/bin/sh", "-c"]
+                                      },
+                                      "args": {
+                                        "type": "array",
+                                        "items": { "type": "string" },
+                                        "example": [
+                                          "df -h\n echo \"\\n\\n\\n new: \\n\\n\"\n ls -l /opt/mstr/ContainerState/\n"
+                                        ]
+                                      },
+                                      "env": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "name": { "type": "string" },
+                                            "value": { "type": "string" }
+                                          },
+                                          "example": {
+                                            "name": "ENVIRONMENT_NAME",
+                                            "value": "env-xxxxxxx"
+                                          }
+                                        }
+                                      },
+                                      "volumeMounts": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "name": {
+                                              "type": "string",
+                                              "example": "localstoragevolume"
+                                            },
+                                            "mountPath": {
+                                              "type": "string",
+                                              "example": "/opt/mstr/ContainerState"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "volumes": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "name": {
+                                        "type": "string",
+                                        "example": "localstoragevolume"
+                                      },
+                                      "persistentVolumeClaim": {
+                                        "type": "object",
+                                        "properties": {
+                                          "claimName": {
+                                            "type": "string",
+                                            "example": "env-xxxxxxxx-persistent-storage"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "restartPolicy": {
+                                  "type": "string",
+                                  "example": "Never"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "example": "mstr-env-env-xxxxxxxx"
+                },
+                "jobName": {
+                  "type": "string",
+                  "example": "sync-customer-bucket-job"
+                },
+                "contextName": {
+                  "type": "string",
+                  "example": "gke_prj-mstr-prod-tenant-xxxxxxxxxxx-env-cluster"
+                },
+                "jobSpec": {
+                  "type": "object",
+                  "properties": {
+                    "apiVersion": { "type": "string", "example": "batch/v1" },
+                    "kind": { "type": "string", "example": "Job" },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "example": "sync-customer-bucket-job"
+                        },
+                        "namespace": {
+                          "type": "string",
+                          "example": "mstr-env-env-xxxxxx"
+                        }
+                      }
+                    },
+                    "spec": {
+                      "type": "object",
+                      "properties": {
+                        "template": {
+                          "type": "object",
+                          "properties": {
+                            "metadata": {
+                              "type": "object",
+                              "properties": {
+                                "annotations": {
+                                  "type": "object",
+                                  "properties": {
+                                    "sidecar.istio.io/inject": {
+                                      "type": "string",
+                                      "example": "false"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "spec": {
+                              "type": "object",
+                              "properties": {
+                                "securityContext": {
+                                  "type": "object",
+                                  "properties": {
+                                    "runAsUser": {
+                                      "type": "integer",
+                                      "example": 0
+                                    },
+                                    "runAsGroup": {
+                                      "type": "integer",
+                                      "example": 0
+                                    }
+                                  }
+                                },
+                                "containers": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "name": {
+                                        "type": "string",
+                                        "example": "infrastructure-service"
+                                      },
+                                      "image": {
+                                        "type": "string",
+                                        "example": "us-east4-docker.pkg.dev/g000-mgmt-infra/cicd-repo/bash-basic-image:0.0.1"
+                                      },
+                                      "command": {
+                                        "type": "array",
+                                        "items": { "type": "string" },
+                                        "example": ["/bin/sh", "-c"]
+                                      },
+                                      "args": {
+                                        "type": "array",
+                                        "items": { "type": "string" },
+                                        "example": [
+                                          "df -h\n echo \"\\n\\n\\n new: \\n\\n\"\n ls -l /opt/mstr/ContainerState/\n"
+                                        ]
+                                      },
+                                      "env": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "name": { "type": "string" },
+                                            "value": { "type": "string" }
+                                          },
+                                          "example": {
+                                            "name": "ENVIRONMENT_NAME",
+                                            "value": "env-xxxxxxx"
+                                          }
+                                        }
+                                      },
+                                      "volumeMounts": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "name": {
+                                              "type": "string",
+                                              "example": "localstoragevolume"
+                                            },
+                                            "mountPath": {
+                                              "type": "string",
+                                              "example": "/opt/mstr/ContainerState"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "volumes": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "name": {
+                                        "type": "string",
+                                        "example": "localstoragevolume"
+                                      },
+                                      "persistentVolumeClaim": {
+                                        "type": "object",
+                                        "properties": {
+                                          "claimName": {
+                                            "type": "string",
+                                            "example": "env-xxxxxxxx-persistent-storage"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "restartPolicy": {
+                                  "type": "string",
+                                  "example": "Never"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["GCP"]
+      },
+      "parameters": []
+    },
+    "/gcp/job/{job_id}/": {
+      "delete": {
+        "operationId": "Gcp Cluster Jobs delete",
+        "summary": "Gcp Cluster Jobs delete interface",
+        "description": "for Gcp Cluster Jobs delete info",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "description": "ID of the job to delete",
+            "required": true,
+            "type": "string",
+            "example": "xxxxxx"
+          }
+        ],
+        "responses": { "204": { "description": "" } },
+        "tags": ["GCP"]
+      },
+      "parameters": [
+        { "name": "job_id", "in": "path", "required": true, "type": "string" }
+      ]
+    },
+    "/gcp/projects": {
+      "get": {
+        "operationId": "Gcp projects get",
+        "summary": "Gcp projects info interface",
+        "description": "for getting Gcp projects info",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["GCP"]
+      },
+      "post": {
+        "operationId": "Gcp project post",
+        "summary": "Gcp project post info interface",
+        "description": "for posting Gcp project info",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customer_id": { "type": "string", "example": "Gxx" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customer_id": { "type": "string", "example": "Gxx" }
+              }
+            }
+          }
+        },
+        "tags": ["GCP"]
+      },
+      "parameters": []
+    },
+    "/gcp/scheduler": {
+      "get": {
+        "operationId": "Gcp scheduler get",
+        "summary": "Gcp Scheduler info interface",
+        "description": "for getting Gcp Scheduler info",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["GCP"]
+      },
+      "parameters": []
+    },
+    "/gcp/sync/logs/job": {
+      "post": {
+        "operationId": "Gcp Cluster Sync logs Jobs create",
+        "summary": "Gcp Cluster Sync logs Jobs create interface",
+        "description": "for Gcp Cluster Sync logs Jobs create",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "envId": { "type": "string", "example": "env-xxxxxxxx" },
+                "envLabel": { "type": "string", "example": "prod/dev" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "envId": { "type": "string", "example": "env-xxxxxxxx" },
+                "envLabel": { "type": "string", "example": "prod/dev" }
+              }
+            }
+          }
+        },
+        "tags": ["GCP_SYNC_JOB"]
+      },
+      "parameters": []
+    },
+    "/gcp/sync/logs/job/{env_id}/": {
+      "delete": {
+        "operationId": "Gcp Cluster Sync logs Jobs delete",
+        "summary": "Gcp Cluster Sync logs Jobs delete interface",
+        "description": "for Gcp Cluster Sync logs Jobs delete info",
+        "parameters": [
+          {
+            "name": "env_id",
+            "in": "path",
+            "description": "ID of the job to delete",
+            "required": true,
+            "type": "string",
+            "example": "xxxxxx"
+          }
+        ],
+        "responses": { "204": { "description": "" } },
+        "tags": ["GCP_SYNC_JOB"]
+      },
+      "parameters": [
+        { "name": "env_id", "in": "path", "required": true, "type": "string" }
+      ]
+    },
+    "/gcp/ubs": {
+      "get": {
+        "operationId": "Gcp UBs get",
+        "summary": "Gcp UBs info interface",
+        "description": "for getting Gcp UBs info",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["GCP"]
+      },
+      "parameters": []
+    },
+    "/gcp/vms": {
+      "get": {
+        "operationId": "Gcp vms get",
+        "summary": "Gcp vms info interface",
+        "description": "for getting Gcp vms info",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["GCP"]
+      },
+      "parameters": []
+    },
+    "/mx/AapScheduler": {
+      "get": {
+        "operationId": "mx_AapScheduler_list",
+        "description": "",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["mx"]
+      },
+      "post": {
+        "operationId": "mx_AapScheduler_create",
+        "description": "",
+        "parameters": [],
+        "responses": { "201": { "description": "" } },
+        "tags": ["mx"]
+      },
+      "delete": {
+        "operationId": "mx_AapScheduler_delete",
+        "description": "",
+        "parameters": [],
+        "responses": { "204": { "description": "" } },
+        "tags": ["mx"]
+      },
+      "parameters": []
+    },
+    "/mx/email": {
+      "get": {
+        "operationId": "ServiceNowCid",
+        "summary": "email interface",
+        "description": "email interface for getting email template",
+        "parameters": [
+          {
+            "name": "window",
+            "in": "query",
+            "description": "window: xxxxxxxx",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["ServiceNow"]
+      },
+      "post": {
+        "operationId": "mx_email_create",
+        "description": "",
+        "parameters": [],
+        "responses": { "201": { "description": "" } },
+        "tags": ["mx"]
+      },
+      "parameters": []
+    },
+    "/mx/sync/logs/delete/job": {
+      "post": {
+        "operationId": "mx_sync_logs_delete_job_create",
+        "description": "",
+        "parameters": [],
+        "responses": { "201": { "description": "" } },
+        "tags": ["mx"]
+      },
+      "parameters": []
+    },
+    "/mx/sync/logs/job": {
+      "post": {
+        "operationId": "mx_sync_logs_job_create",
+        "description": "",
+        "parameters": [],
+        "responses": { "201": { "description": "" } },
+        "tags": ["mx"]
+      },
+      "parameters": []
+    },
+    "/rdsClientInfo": {
+      "get": {
+        "operationId": "RdsClientInfo",
+        "summary": "RdsClientInfo interface",
+        "description": "for getting RdsClientInfo",
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "description": "Azure/Aws",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Rds info"]
+      },
+      "post": {
+        "operationId": "rdsClientInfo_create",
+        "summary": "RdsClientInfo Post",
+        "description": "",
+        "parameters": [],
+        "responses": { "201": { "description": "" } },
+        "tags": ["Rds info"],
+        "deprecated": true
+      },
+      "parameters": []
+    },
+    "/rdsFlexibleInfo": {
+      "get": {
+        "operationId": "RdsClientInfo",
+        "summary": "RdsClientInfo interface",
+        "description": "for getting RdsClientInfo",
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "description": "Azure/Aws",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Rds info"]
+      },
+      "parameters": []
+    },
+    "/scheduler": {
+      "get": {
+        "operationId": "SchedulerInfo get",
+        "summary": "SchedulerEc2Info interface",
+        "description": "for getting RdsClientInfo",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Scheduler"]
+      },
+      "post": {
+        "operationId": "SchedulerInstanceInfo post",
+        "summary": "SchedulerInstanceInfo interface",
+        "description": "for post SchedulerInstanceInfo",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["ec2_name"],
+              "type": "object",
+              "properties": {
+                "scheduleId": {
+                  "description": "schedule id: xxxxxx",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "required": ["ec2_name"],
+              "type": "object",
+              "properties": {
+                "scheduleId": {
+                  "description": "schedule id: xxxxxx",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Scheduler"]
+      },
+      "delete": {
+        "operationId": "SchedulerInstanceInfo delete",
+        "summary": "SchedulerInstanceInfo interface",
+        "description": "for delete SchedulerInstanceInfo",
+        "parameters": [
+          {
+            "name": "ec2_name",
+            "in": "query",
+            "description": "ec2 name: evn-xxxxxxxx",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleId",
+            "in": "query",
+            "description": "scheduleId: xxxxxx",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "204": { "description": "" } },
+        "tags": ["Scheduler"]
+      },
+      "parameters": []
+    },
+    "/scheduler/comming1Week": {
+      "get": {
+        "operationId": "SchedulerEc2Comming1weekInfo",
+        "summary": "SchedulerEc2Comming1weekInfo interface",
+        "description": "for getting Scheduler if envrionment within Comming 1 week Info",
+        "parameters": [
+          {
+            "name": "ec2_name",
+            "in": "query",
+            "description": "ec2 name: evn-xxxxxxxx",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Scheduler"]
+      },
+      "parameters": []
+    },
+    "/scheduler/comming24": {
+      "get": {
+        "operationId": "SchedulerEc2InfoComming24",
+        "summary": "SchedulerEc2Comming24Info interface",
+        "description": "for getting Scheduler if envrionment within Comming 24 hours Info",
+        "parameters": [
+          {
+            "name": "ec2_name",
+            "in": "query",
+            "description": "ec2 name: evn-xxxxxxxx",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Scheduler"]
+      },
+      "parameters": []
+    },
+    "/scheduler/nexttime": {
+      "get": {
+        "operationId": "SchedulerEc2Info",
+        "summary": "SchedulerEc2Info interface",
+        "description": "for getting SchedulerEc2Info",
+        "parameters": [
+          {
+            "name": "ec2_name",
+            "in": "query",
+            "description": "ec2 name: evn-xxxxxxxx",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Scheduler"]
+      },
+      "parameters": []
+    },
+    "/servicenow": {
+      "post": {
+        "operationId": "ServiceNow",
+        "summary": "ServiceNow interface",
+        "description": "ServiceNow interface for getting ServiceNow info",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["queryFields", "queryFilter"],
+              "type": "object",
+              "properties": {
+                "queryFields": {
+                  "description": "queryFields",
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "queryFilter": {
+                  "description": "queryFilter",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "required": ["queryFields", "queryFilter"],
+              "type": "object",
+              "properties": {
+                "queryFields": {
+                  "description": "queryFields",
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "queryFilter": {
+                  "description": "queryFilter",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["ServiceNow"]
+      },
+      "parameters": []
+    },
+    "/servicenowcid": {
+      "get": {
+        "operationId": "ServiceNowCid",
+        "summary": "ServiceNowCid interface",
+        "description": "ServiceNowCid interface for getting ServiceNowCid info",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["ServiceNow"]
+      },
+      "parameters": []
+    }
+  },
+  "definitions": {}
+}

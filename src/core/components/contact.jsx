@@ -15,27 +15,28 @@ class Contact extends React.Component {
   }
 
   render() {
-    const { data, getComponent, selectedServer, url: specUrl } = this.props
-    const name = data.get("name", "the developer")
+    // const { data, getComponent, selectedServer, url: specUrl } = this.props
+    const { data, selectedServer, url: specUrl } = this.props
+    // const name = data.get("name", "the developer")
     const url = safeBuildUrl(data.get("url"), specUrl, { selectedServer })
-    const email = data.get("email")
+    // const email = data.get("email")
 
-    const Link = getComponent("Link")
+    // const Link = getComponent("Link")
 
     return (
       <div className="info__contact">
         {url && (
           <div>
-            <Link href={sanitizeUrl(url)} target="_blank">
+            {/* <Link href={sanitizeUrl(url)} target="_blank">
               {name} - Website
-            </Link>
+            </Link> */}
           </div>
         )}
-        {email && (
+        {/* {email && (
           <Link href={sanitizeUrl(`mailto:${email}`)}>
             {url ? `Send email to ${name}` : `Contact ${name}`}
           </Link>
-        )}
+        )} */}
       </div>
     )
   }

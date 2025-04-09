@@ -13,7 +13,7 @@ describe("<Info/> Sanitization", function(){
 		getComponent: c => components[c] || dummyComponent,
 		info: fromJS({
 			title: "Test Title **strong** <script>alert(1)</script>",
-			description: "Description *with* <script>Markdown</script>"
+			// description: "Description *with* <script>Markdown</script>"
 		}),
 		host: "example.test",
 		basePath: "/api",
